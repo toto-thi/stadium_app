@@ -17,4 +17,8 @@ const double DEFAULT_PAGE_PADDING = 20;
 //routes
 const String HOME_ROUTE = '/';
 const String LOGIN_ROUTE = '/login';
+const String SIGNUP_ROUTE = '/signup';
+const String SEARCH_ROUTE = '/search';
+const String BOOKING_ROUTE = '/booking';
+const String SETTING_ROUTE = '/settings';
 const String CHANGE_PASSWORD_ROUTE = '/change_password';
