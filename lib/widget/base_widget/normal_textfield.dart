@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 
-class EmailInputField extends StatefulWidget {
+class NormalInputField extends StatefulWidget {
   final TextEditingController? controller;
   final String? hintText;
 
-  const EmailInputField(
+  const NormalInputField(
       {Key? key, required this.controller, required this.hintText})
       : super(key: key);
 
   @override
-  State<EmailInputField> createState() => _EmailInputFieldState();
+  State<NormalInputField> createState() => _NormalInputFieldState();
 }
 
-class _EmailInputFieldState extends State<EmailInputField> {
+class _NormalInputFieldState extends State<NormalInputField> {
   @override
   void initState() {
     super.initState();
@@ -43,7 +43,6 @@ class _EmailInputFieldState extends State<EmailInputField> {
           ),
           fillColor: Colors.grey[200],
           filled: true),
-      keyboardType: TextInputType.emailAddress,
       textInputAction: TextInputAction.done,
     );
   }
