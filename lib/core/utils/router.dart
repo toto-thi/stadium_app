@@ -1,44 +1,55 @@
 import 'package:flutter/material.dart';
 import 'package:stadium_app/core/utils/constants.dart';
-
+import 'package:stadium_app/features/firebase_auth/presentation/page/forgot_password_page.dart';
+import 'package:stadium_app/features/firebase_auth/presentation/page/sign_up_page.dart';
+import 'package:stadium_app/features/firebase_auth/presentation/page/sing_in_page.dart';
 import '../../features/home/presentation/pages/home_page.dart';
-import '../../features/login/presentation/page/login_page.dart';
 
-class CusRouter {
-  static Route<dynamic> generateRoute(RouteSettings settings) {
+class OnGenerateRoute {
+  static Route<dynamic> route(RouteSettings settings) {
+    final args = settings.arguments;
+
     switch (settings.name) {
-      case LOGIN_ROUTE:
-        return MaterialPageRoute(
-          builder: (_) => const LogInPage(),
+      case SIGN_IN_ROUTE:
+        return materialBuilder(
+          widget: const SignInPage(),
         );
-      case SIGNUP_ROUTE:
-        return MaterialPageRoute(
-          builder: (_) => const HomePage(),
+      case SIGN_UP_ROUTE:
+        return materialBuilder(
+          widget: const SignUpPage(),
+        );
+      case FORGOT_PASSWORD_ROUTE:
+        return materialBuilder(
+          widget: const ForgotPasswordPage(),
         );
       case HOME_ROUTE:
         return MaterialPageRoute(
           builder: (_) => const HomePage(),
         );
-      case SEARCH_ROUTE:
-        return MaterialPageRoute(
-          builder: (_) => const HomePage(),
-        );
-      case BOOKING_ROUTE:
-        return MaterialPageRoute(
-          builder: (_) => const HomePage(),
-        );
-      case SETTING_ROUTE:
-        return MaterialPageRoute(
-          builder: (_) => const HomePage(),
-        );
-      case CHANGE_PASSWORD_ROUTE:
-        return MaterialPageRoute(
-          builder: (_) => const HomePage(),
-        );
+      // case SEARCH_ROUTE:
+      //   return MaterialPageRoute(
+      //     builder: (_) => const HomePage(),
+      //   );
+      // case BOOKING_ROUTE:
+      //   return MaterialPageRoute(
+      //     builder: (_) => const HomePage(),
+      //   );
+      // case SETTING_ROUTE:
+      //   return MaterialPageRoute(
+      //     builder: (_) => const HomePage(),
+      //   );
+      // case CHANGE_PASSWORD_ROUTE:
+      //   return MaterialPageRoute(
+      //     builder: (_) => const HomePage(),
+      //   );
       default:
         return MaterialPageRoute(
-          builder: (_) => const LogInPage(),
+          builder: (_) => const SignInPage(),
         );
     }
   }
+}
+
+MaterialPageRoute materialBuilder({required Widget widget}) {
+  return MaterialPageRoute(builder: (_) => widget);
 }

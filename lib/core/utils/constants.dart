@@ -1,3 +1,5 @@
+// ignore_for_file: constant_identifier_names
+
 const String CACHED_TOKEN = 'CACHED_TOKEN';
 
 const String API_BASE_URL = 'BASE_URL'; // add the base url here
@@ -16,9 +18,11 @@ const double DEFAULT_PAGE_PADDING = 20;
 
 //routes
 const String HOME_ROUTE = '/';
-const String LOGIN_ROUTE = '/login';
-const String SIGNUP_ROUTE = '/signup';
-const String SEARCH_ROUTE = '/search';
-const String BOOKING_ROUTE = '/booking';
-const String SETTING_ROUTE = '/settings';
-const String CHANGE_PASSWORD_ROUTE = '/change_password';
+const String AUTH_ROUTE = 'auth';
+const String SIGN_IN_ROUTE = 'login';
+const String SIGN_UP_ROUTE = 'signup';
+const String FORGOT_PASSWORD_ROUTE = 'forget_password';
+const String SEARCH_ROUTE = 'search';
+const String BOOKING_ROUTE = 'booking';
+const String SETTING_ROUTE = 'settings';
+const String CHANGE_PASSWORD_ROUTE = 'change_password';

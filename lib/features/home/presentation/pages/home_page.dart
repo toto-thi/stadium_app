@@ -11,8 +11,13 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      bottomNavigationBar: CusNavBar(),
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('App Stadium'),
+        centerTitle: true,
+      ),
+      body: const Center(child: Text('This is Home Page')),
+      bottomNavigationBar: const CusNavBar(),
     );
   }
 }

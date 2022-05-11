@@ -31,21 +31,26 @@ class _PasswordInputFieldState extends State<PasswordInputField> {
       //
       controller: widget.controller,
       decoration: InputDecoration(
-        hintText: 'ກະລຸນາໃສ່ລະຫັດ',
-        labelText: 'Password',
-        //errorText: 'ລະຫັດຜ່ານບໍ່ຖືກ',
-        suffixIcon: IconButton(
-          icon: ispasswordVisible
-              ? const Icon(Icons.visibility_off)
-              : const Icon(Icons.visibility),
-          onPressed: () => setState(() {
-            ispasswordVisible = !ispasswordVisible;
-          }),
-        ),
-        border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(8.0),
-            borderSide: const BorderSide(width: 0, color: Colors.transparent)),
-      ),
+          hintText: 'Password',
+          //errorText: 'ລະຫັດຜ່ານບໍ່ຖືກ',
+          suffixIcon: IconButton(
+            icon: ispasswordVisible
+                ? const Icon(Icons.visibility_off)
+                : const Icon(Icons.visibility),
+            onPressed: () => setState(() {
+              ispasswordVisible = !ispasswordVisible;
+            }),
+          ),
+          enabledBorder: OutlineInputBorder(
+            borderSide: const BorderSide(color: Colors.white),
+            borderRadius: BorderRadius.circular(10),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderSide: const BorderSide(color: Colors.grey),
+            borderRadius: BorderRadius.circular(10),
+          ),
+          fillColor: Colors.grey[200],
+          filled: true),
       obscureText: !ispasswordVisible,
     );
   }
