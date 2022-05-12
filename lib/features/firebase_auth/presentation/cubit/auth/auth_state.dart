@@ -12,6 +12,8 @@ class AuthInitial extends AuthState {
   List<Object> get props => [];
 }
 
+class AuthLoading extends AuthState {}
+
 class Authenticated extends AuthState {
   final String uid;
 

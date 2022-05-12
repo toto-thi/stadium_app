@@ -8,7 +8,7 @@ abstract class AuthenticationRemoteDataSource {
   Future<void> signIn(UserEntity userEntity);
   Future<void> signUp(UserEntity userEntity);
   Future<void> singOut();
-  Future<String> getCurrentUId();
+  Future<String?> getCurrentUId();
   Future<void> getCreateCurrentUser(UserEntity userEntity);
 }
 
@@ -24,7 +24,7 @@ class AuthenticationRemoteDataSourceImpl
   Future<bool> isSignIn() async => auth.currentUser?.uid != null;
 
   @override
-  Future<String> getCurrentUId() async => auth.currentUser!.uid;
+  Future<String?> getCurrentUId() async => auth.currentUser?.uid;
 
   @override
   Future<void> getCreateCurrentUser(UserEntity userEntity) async {

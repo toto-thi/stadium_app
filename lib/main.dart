@@ -44,11 +44,15 @@ class MyApp extends StatelessWidget {
         initialRoute: SIGN_IN_ROUTE,
         routes: {
           "/": (context) {
-            return BlocBuilder<AuthCubit, AuthState>(builder: (context, authState){
-              if( authState is Authenticated) {
+            return BlocBuilder<AuthCubit, AuthState>(
+                builder: (context, authState) {
+              if (authState is AuthLoading) {
+                return const Center(
+                  child: CircularProgressIndicator(),
+                );
+              } else if (authState is Authenticated) {
                 return const HomePage();
-              }
-              if (authState is UnAuthenticated) {
+              } else if (authState is UnAuthenticated) {
                 return const SignInPage();
               }
 

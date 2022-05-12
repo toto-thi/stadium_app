@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:stadium_app/core/utils/constants.dart';
 import 'package:stadium_app/widget/base_widget/email_input.dart';
 
 class ForgotPasswordPage extends StatefulWidget {
@@ -22,6 +23,13 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () => {
+            Navigator.pushNamedAndRemoveUntil(
+                context, SIGN_IN_ROUTE, (route) => false),
+          },
+        ),
         backgroundColor: Colors.green[300],
         elevation: 0,
       ),
@@ -43,9 +51,12 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
               const SizedBox(height: 15.0),
 
               //email field
-              EmailInputField(
-                  controller: emailController,
-                  hintText: 'Enter your email to recover password'),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 18.0),
+                child: EmailInputField(
+                    controller: emailController,
+                    hintText: 'Enter your email to recover password'),
+              ),
               const SizedBox(height: 15.0),
 
               //button
@@ -53,13 +64,14 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                 padding: const EdgeInsets.symmetric(horizontal: 18.0),
                 child: GestureDetector(
                   onTap: () => {
-                    passwordReset()
+                    passwordReset(),
+                    emailController.clear(),
                   },
                   child: Container(
                     padding: const EdgeInsets.all(20.0),
                     decoration: BoxDecoration(
-                      color: Colors.deepPurple[700],
-                      borderRadius: BorderRadius.circular(12.0),
+                      color: Colors.green,
+                      borderRadius: BorderRadius.circular(10.0),
                     ),
                     child: const Center(
                       child: Text(
@@ -83,7 +95,8 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
 
   Future passwordReset() async {
     try {
-      await FirebaseAuth.instance.sendPasswordResetEmail(email: emailController.text.trim());
+      await FirebaseAuth.instance
+          .sendPasswordResetEmail(email: emailController.text.trim());
 
       showDialog(
           context: context,

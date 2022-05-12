@@ -6,7 +6,7 @@ import 'package:stadium_app/features/firebase_auth/presentation/cubit/auth/auth_
 import 'package:stadium_app/features/firebase_auth/presentation/cubit/user/user_cubit.dart';
 import 'package:stadium_app/features/home/presentation/pages/home_page.dart';
 import 'package:stadium_app/widget/base_widget/email_input.dart';
-import 'package:stadium_app/widget/base_widget/snack_bar_error.dart';
+// import 'package:stadium_app/widget/base_widget/snack_bar_error.dart';
 
 import '../../../../../widget/base_widget/password_input.dart';
 
@@ -21,8 +21,8 @@ class _SignInPageState extends State<SignInPage> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
 
-  final GlobalKey<ScaffoldState> _scaffoldGlobalKey =
-      GlobalKey<ScaffoldState>();
+  // final GlobalKey<ScaffoldState> _scaffoldGlobalKey =
+  //     GlobalKey<ScaffoldState>();
 
   @override
   void dispose() {
@@ -34,26 +34,40 @@ class _SignInPageState extends State<SignInPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      key: _scaffoldGlobalKey,
-      backgroundColor: Colors.green.shade400,
+      // key: _scaffoldGlobalKey,
+      backgroundColor: Colors.white,
       body: BlocConsumer<UserCubit, UserState>(
         listener: (context, userState) {
           if (userState is UserSuccess) {
             context.read<AuthCubit>().loggedIn();
           }
           if (userState is UserFailure) {
-            snackBarError(
-                msg: "Invalid email", scaffoldState: _scaffoldGlobalKey);
+            // snackBarError(
+            //     msg: "Invalid email", scaffoldState: _scaffoldGlobalKey);
           }
         },
         builder: (context, userState) {
-          if (userState is UserSuccess) {
+          if (userState is UserLoading) {
+            return Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: const [
+                    CircularProgressIndicator(),
+                    SizedBox(height: 10.0),
+                    Text(
+                      'ກຳລັງໂຫລດ',
+                      style: TextStyle(fontSize: 18, color: Colors.green),
+                    ),
+                  ],
+                ),
+              );
+          } else if (userState is UserSuccess) {
             return BlocBuilder<AuthCubit, AuthState>(
               builder: (context, authState) {
                 if (authState is Authenticated) {
                   return const HomePage();
                 } else {
-                  return _bodyWidget();
+                  return  _bodyWidget();
                 }
               },
             );
@@ -75,9 +89,9 @@ class _SignInPageState extends State<SignInPage> {
               //logo app
               Image.asset(
                 'assets/images/logo.png',
-                height: 75,
+                height: 150,
               ),
-              const SizedBox(height: 50.0),
+              const SizedBox(height: 25.0),
 
               //app name
               const Text(
@@ -85,7 +99,7 @@ class _SignInPageState extends State<SignInPage> {
                 style: TextStyle(
                   fontSize: 24,
                   fontWeight: FontWeight.bold,
-                  color: Colors.white,
+                  color: Colors.green,
                 ),
                 textAlign: TextAlign.center,
               ),
@@ -103,7 +117,10 @@ class _SignInPageState extends State<SignInPage> {
               //password input
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 18.0),
-                child: PasswordInputField(controller: passwordController),
+                child: PasswordInputField(
+                  controller: passwordController,
+                  hintText: 'Password',
+                ),
               ),
               const SizedBox(height: 10.0),
 
@@ -122,7 +139,7 @@ class _SignInPageState extends State<SignInPage> {
                         'Forgot Password?',
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
-                          color: Colors.white,
+                          color: Colors.green,
                         ),
                       ),
                     ),
@@ -136,7 +153,8 @@ class _SignInPageState extends State<SignInPage> {
                 padding: const EdgeInsets.symmetric(horizontal: 18.0),
                 child: GestureDetector(
                   onTap: () => {
-                    submitSignIn()
+                    submitSignIn(),
+                    clearText(),
                   },
                   child: Container(
                     padding: const EdgeInsets.all(20.0),
@@ -170,12 +188,15 @@ class _SignInPageState extends State<SignInPage> {
                     ),
                   ),
                   GestureDetector(
-                    onTap: () => {},
+                    onTap: () => {
+                      Navigator.pushNamedAndRemoveUntil(
+                          context, SIGN_UP_ROUTE, (route) => false),
+                    },
                     child: const Text(
                       ' Register now',
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
-                        color: Colors.white,
+                        color: Colors.green,
                       ),
                     ),
                   )
@@ -196,5 +217,10 @@ class _SignInPageState extends State<SignInPage> {
             password: passwordController.text.trim(),
           ));
     }
+  }
+
+  void clearText() {
+    emailController.clear();
+    passwordController.clear();
   }
 }
