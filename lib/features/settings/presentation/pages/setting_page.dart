@@ -3,7 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:stadium_app/features/firebase_auth/presentation/cubit/auth/auth_cubit.dart';
 
 class SettingPage extends StatefulWidget {
-  const SettingPage({Key? key}) : super(key: key);
+  final String uid;
+  const SettingPage({Key? key, required this.uid}) : super(key: key);
 
   @override
   State<SettingPage> createState() => _SettingPageState();
@@ -15,6 +16,7 @@ class _SettingPageState extends State<SettingPage> {
     return Center(
       child: SafeArea(
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             const Text('This is Setting Page'),
             ElevatedButton(

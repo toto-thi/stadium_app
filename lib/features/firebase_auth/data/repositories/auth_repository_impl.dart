@@ -1,4 +1,5 @@
 import 'package:stadium_app/features/firebase_auth/data/datasources/auth_remote_datasource.dart';
+import 'package:stadium_app/features/firebase_auth/data/models/user_model.dart';
 import 'package:stadium_app/features/firebase_auth/domain/entities/user_entity.dart';
 import 'package:stadium_app/core/error/failures.dart';
 import 'package:dartz/dartz.dart';
@@ -42,5 +43,11 @@ class AuthRepositoryImpl implements AuthRepository {
   @override
   Future<Either<Failure, void>> singOut() async {
     return Right(await authRemoteDataSource.singOut());
+  }
+
+  @override
+  Future<Either<Failure, UserModel?>> getUserDetailById(String uid) async {
+    var result = await authRemoteDataSource.getUserDetail(uid);
+    return Right(result);
   }
 }

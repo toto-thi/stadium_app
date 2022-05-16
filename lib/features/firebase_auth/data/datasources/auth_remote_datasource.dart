@@ -10,6 +10,7 @@ abstract class AuthenticationRemoteDataSource {
   Future<void> singOut();
   Future<String?> getCurrentUId();
   Future<void> getCreateCurrentUser(UserEntity userEntity);
+  Future<UserModel?> getUserDetail(String uid);
 }
 
 class AuthenticationRemoteDataSourceImpl
@@ -74,4 +75,14 @@ class AuthenticationRemoteDataSourceImpl
 
   @override
   Future<void> singOut() async => auth.signOut();
+
+  @override
+  Future<UserModel?> getUserDetail(String uid) async {
+      final userCollectionRef = firestore.collection("users").doc(uid);
+      final snapShot = await userCollectionRef.get();
+
+      if(snapShot.exists){
+       return UserModel.fromSnapshot(snapShot);
+      }
+  }
 }

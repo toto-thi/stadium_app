@@ -4,8 +4,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:stadium_app/core/utils/constants.dart';
 import 'package:stadium_app/features/firebase_auth/presentation/cubit/auth/auth_cubit.dart';
 import 'package:stadium_app/features/firebase_auth/presentation/cubit/user/user_cubit.dart';
-import 'package:stadium_app/features/firebase_auth/presentation/page/sing_in_page.dart';
-import 'package:stadium_app/features/home/presentation/pages/home_page.dart';
 import 'package:stadium_app/firebase_options.dart';
 import 'package:stadium_app/service_locator.dart';
 import 'service_locator.dart' as di;
@@ -33,6 +31,9 @@ class MyApp extends StatelessWidget {
         BlocProvider(
           create: (_) => sl<UserCubit>(),
         ),
+        // BlocProvider(
+        //   create: (_) => sl<GetUserCubit>(),
+        // ),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
