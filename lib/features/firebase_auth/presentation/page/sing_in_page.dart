@@ -4,8 +4,8 @@ import 'package:stadium_app/core/utils/constants.dart';
 import 'package:stadium_app/features/firebase_auth/domain/entities/user_entity.dart';
 import 'package:stadium_app/features/firebase_auth/presentation/cubit/auth/auth_cubit.dart';
 import 'package:stadium_app/features/firebase_auth/presentation/cubit/user/user_cubit.dart';
-import 'package:stadium_app/features/home/presentation/pages/home_page.dart';
 import 'package:stadium_app/widget/base_widget/email_input.dart';
+import 'package:stadium_app/widget/base_widget/loadingScreen.dart';
 import 'package:stadium_app/widget/home_widget/bottom_navigation_bar.dart';
 // import 'package:stadium_app/widget/base_widget/snack_bar_error.dart';
 
@@ -49,19 +49,7 @@ class _SignInPageState extends State<SignInPage> {
         },
         builder: (context, userState) {
           if (userState is UserLoading) {
-            return Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: const [
-                    CircularProgressIndicator(),
-                    SizedBox(height: 10.0),
-                    Text(
-                      'ກຳລັງໂຫລດ',
-                      style: TextStyle(fontSize: 18, color: Colors.green),
-                    ),
-                  ],
-                ),
-              );
+            return buildLoadingScreen();
           } else if (userState is UserSuccess) {
             return BlocBuilder<AuthCubit, AuthState>(
               builder: (context, authState) {

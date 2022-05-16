@@ -8,7 +8,7 @@ import 'package:stadium_app/features/firebase_auth/data/datasources/auth_remote_
 import 'package:stadium_app/features/firebase_auth/data/repositories/auth_repository_impl.dart';
 import 'package:stadium_app/features/firebase_auth/domain/repositories/auth_repository.dart';
 import 'package:stadium_app/features/firebase_auth/domain/usecases/get_current_uid_usecase.dart';
-import 'package:stadium_app/features/firebase_auth/domain/usecases/get_current_user_usecase.dart.dart';
+import 'package:stadium_app/features/firebase_auth/domain/usecases/get_create_current_user_usecase.dart.dart';
 import 'package:stadium_app/features/firebase_auth/domain/usecases/is_signed_in_usecase.dart';
 import 'package:stadium_app/features/firebase_auth/domain/usecases/sign_up_usecase.dart';
 import 'package:stadium_app/features/firebase_auth/domain/usecases/sing_in_usecase.dart.dart';
@@ -54,6 +54,9 @@ Future<void> init() async {
 
 //homepage
 
+  //cubit
+
+  
 //search?
 
 //booking

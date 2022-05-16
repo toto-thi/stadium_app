@@ -5,6 +5,7 @@ import 'package:stadium_app/features/firebase_auth/presentation/cubit/auth/auth_
 import 'package:stadium_app/features/firebase_auth/presentation/page/sing_in_page.dart';
 import 'package:stadium_app/features/home/presentation/pages/home_page.dart';
 import 'package:stadium_app/features/settings/presentation/pages/setting_page.dart';
+import 'package:stadium_app/widget/base_widget/loadingScreen.dart';
 
 class MyBottomNavigationBar extends StatefulWidget {
   const MyBottomNavigationBar({Key? key}) : super(key: key);
@@ -18,31 +19,23 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar> {
 
   // ignore: prefer_final_fields
   final _widgetOptions = [
+    // homepage
     BlocBuilder<AuthCubit, AuthState>(
       builder: (context, authState) {
         if (authState is AuthLoading) {
-          return Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: const [
-                CircularProgressIndicator(),
-                SizedBox(height: 10.0),
-                Text(
-                  'ກຳລັງໂຫລດ',
-                  style: TextStyle(fontSize: 18, color: Colors.green),
-                ),
-              ],
-            ),
-          );
+          return buildLoadingScreen();
         } else if (authState is Authenticated) {
-          return const HomePage();
+          return HomePage(
+            uid: authState.uid,
+          );
         }
         return const SignInPage();
       },
     ),
     const Text('ຄົ້ນຫາ'),
     const Text('ລາຍການຈອງ'),
-    const SettingPage(),
+    
+    const SettingPage(uid: 'fdasdf'),
   ];
 
   @override

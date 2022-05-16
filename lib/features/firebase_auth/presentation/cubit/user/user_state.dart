@@ -16,7 +16,6 @@ class UserLoading extends UserState {
   @override
   List<Object> get props => [];
 }
-
 class UserSuccess extends UserState {
   @override
   List<Object> get props => [];
