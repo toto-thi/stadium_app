@@ -3,6 +3,7 @@ import 'package:stadium_app/core/utils/constants.dart';
 import 'package:stadium_app/features/firebase_auth/presentation/page/forgot_password_page.dart';
 import 'package:stadium_app/features/firebase_auth/presentation/page/sign_up_page.dart';
 import 'package:stadium_app/features/firebase_auth/presentation/page/sing_in_page.dart';
+import 'package:stadium_app/widget/home_widget/bottom_navigation_bar.dart';
 import '../../features/home/presentation/pages/home_page.dart';
 
 class OnGenerateRoute {
@@ -24,7 +25,7 @@ class OnGenerateRoute {
         );
       case HOME_ROUTE:
         return MaterialPageRoute(
-          builder: (_) => const HomePage(),
+          builder: (_) => const MyBottomNavigationBar(),
         );
       // case SEARCH_ROUTE:
       //   return MaterialPageRoute(

@@ -38,11 +38,17 @@ class UserCubit extends Cubit<UserState> {
     emit(UserLoading());
 
     try {
-      final r = await signUpUseCase.call(user);
+      final result = await signUpUseCase.call(user);
+      final createUser = await getCreateCurrentUserUseCase.call(user);
 
-      r.fold(
+      result.fold(
         (l) => emit(UserFailure()),
-        (r) => emit(UserSuccess()),
+        (res) => {
+          createUser.fold((l) => emit(UserFailure()), (res) {
+            emit(UserSuccess());
+          }),
+          emit(UserSuccess()),
+        },
       );
     } on ServerException catch (_) {
       emit(UserFailure());

@@ -38,10 +38,10 @@ class _EmailInputFieldState extends State<EmailInputField> {
             borderRadius: BorderRadius.circular(10),
           ),
           focusedBorder: OutlineInputBorder(
-            borderSide: const BorderSide(color: Colors.grey),
+            borderSide: const BorderSide(color: Colors.green),
             borderRadius: BorderRadius.circular(10),
           ),
-          fillColor: Colors.grey[200],
+          fillColor: Colors.grey[100],
           filled: true),
       keyboardType: TextInputType.emailAddress,
       textInputAction: TextInputAction.done,

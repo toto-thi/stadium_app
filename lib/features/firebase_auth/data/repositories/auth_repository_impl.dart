@@ -10,9 +10,9 @@ class AuthRepositoryImpl implements AuthRepository {
   AuthRepositoryImpl({required this.authRemoteDataSource});
 
   @override
-  Future<Either<Failure, String>> getCurrentUId() async {
+  Future<Either<Failure, String?>> getCurrentUId() async {
     var result = await authRemoteDataSource.getCurrentUId();
-    return Right(result);
+    return Right(result ?? "");
   }
 
   @override

@@ -11,6 +11,6 @@ abstract class AuthRepository {
   Future<Either<Failure, void>> signIn(UserEntity user); 
   Future<Either<Failure, void>> signUp(UserEntity user); 
   Future<Either<Failure, void>> singOut(); 
-  Future<Either<Failure, String>> getCurrentUId(); 
+  Future<Either<Failure, String?>> getCurrentUId(); 
   Future<Either<Failure, void>> getCreateCurrentUser(UserEntity user); 
 }

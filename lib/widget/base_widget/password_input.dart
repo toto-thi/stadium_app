@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 class PasswordInputField extends StatefulWidget {
   final TextEditingController? controller;
-
-  const PasswordInputField({Key? key, required this.controller})
+  final String? hintText;
+  const PasswordInputField({Key? key, required this.controller, required this.hintText})
       : super(key: key);
 
   @override
@@ -31,7 +31,7 @@ class _PasswordInputFieldState extends State<PasswordInputField> {
       //
       controller: widget.controller,
       decoration: InputDecoration(
-          hintText: 'Password',
+          hintText: widget.hintText,
           //errorText: 'ລະຫັດຜ່ານບໍ່ຖືກ',
           suffixIcon: IconButton(
             icon: ispasswordVisible
@@ -46,10 +46,10 @@ class _PasswordInputFieldState extends State<PasswordInputField> {
             borderRadius: BorderRadius.circular(10),
           ),
           focusedBorder: OutlineInputBorder(
-            borderSide: const BorderSide(color: Colors.grey),
+            borderSide: const BorderSide(color: Colors.green),
             borderRadius: BorderRadius.circular(10),
           ),
-          fillColor: Colors.grey[200],
+          fillColor: Colors.grey[100],
           filled: true),
       obscureText: !ispasswordVisible,
     );
