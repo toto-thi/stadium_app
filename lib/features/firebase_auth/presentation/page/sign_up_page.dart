@@ -4,11 +4,11 @@ import 'package:stadium_app/core/utils/constants.dart';
 import 'package:stadium_app/features/firebase_auth/domain/entities/user_entity.dart';
 import 'package:stadium_app/features/firebase_auth/presentation/cubit/auth/auth_cubit.dart';
 import 'package:stadium_app/features/firebase_auth/presentation/cubit/user/user_cubit.dart';
-import 'package:stadium_app/features/firebase_auth/presentation/page/sing_in_page.dart';
 import 'package:stadium_app/features/home/presentation/pages/home_page.dart';
 import 'package:stadium_app/widget/base_widget/email_input.dart';
 import 'package:stadium_app/widget/base_widget/normal_textfield.dart';
 import 'package:stadium_app/widget/base_widget/password_input.dart';
+import 'package:stadium_app/widget/home_widget/bottom_navigation_bar.dart';
 // import 'package:stadium_app/widget/base_widget/snack_bar_error.dart';
 
 class SignUpPage extends StatefulWidget {
@@ -45,16 +45,6 @@ class _SignUpPageState extends State<SignUpPage> {
         // key: _scaffoldGlobalKey,
         backgroundColor: Colors.white,
         body: BlocConsumer<UserCubit, UserState>(
-          listener: (context, userState) {
-            if (userState is UserSuccess) {
-              context.read<AuthCubit>().loggedIn();
-            }
-            if (userState is UserFailure) {
-              // snackBarError(
-              //     msg: "Oops, something wrong",
-              //     scaffoldState: _scaffoldGlobalKey);
-            }
-          },
           builder: (context, userState) {
             if (userState is UserLoading) {
               return Center(
@@ -71,17 +61,27 @@ class _SignUpPageState extends State<SignUpPage> {
                 ),
               );
             } else if (userState is UserSuccess) {
-              context.read<AuthCubit>().loggedIn();
               return BlocBuilder<AuthCubit, AuthState>(
                   builder: (context, authState) {
                 if (authState is Authenticated) {
-                  return const HomePage();
+                  return const MyBottomNavigationBar();
                 } else {
                   return _bodyWidget();
                 }
               });
             }
             return _bodyWidget();
+          },
+          listener: (context, userState) {
+            if (userState is UserSuccess) {
+              context.read<AuthCubit>().loggedIn();
+            }
+            if (userState is UserFailure) {
+              // snackBarError(
+              //     msg: "Oops, something wrong",
+              //     scaffoldState: _scaffoldGlobalKey);
+              //handle error, maybe i'll use alertBox
+            }
           },
         ));
   }
@@ -120,10 +120,6 @@ class _SignUpPageState extends State<SignUpPage> {
                     controller: surNameController, hintText: 'ນາມສະກຸນ'),
               ),
               const SizedBox(height: 20.0),
-
-              // //role
-              // NormalInputField(controller: roleController, hintText: 'ຫນ້າທີ່'),
-              // const SizedBox(height: 20.0),
 
               //email input
               Padding(
@@ -195,8 +191,9 @@ class _SignUpPageState extends State<SignUpPage> {
                   ),
                   GestureDetector(
                     onTap: () => {
-                      Navigator.pushNamedAndRemoveUntil(
-                          context, SIGN_IN_ROUTE, (route) => false),
+                      // Navigator.pushNamedAndRemoveUntil(
+                      //     context, SIGN_IN_ROUTE, (route) => false),
+                      Navigator.pushNamed(context, SIGN_IN_ROUTE),
                     },
                     child: const Text(
                       ' Login now',
@@ -228,13 +225,12 @@ class _SignUpPageState extends State<SignUpPage> {
         return;
       }
       context.read<UserCubit>().submitSignUp(
-              user: UserEntity(
-            firstName: firstNameController.text.trim(),
-            surName: surNameController.text.trim(),
-            email: emailController.text.trim(),
-            password: passwordController.text.trim(),
-            role: "member"
-          ));
+          user: UserEntity(
+              firstName: firstNameController.text.trim(),
+              surName: surNameController.text.trim(),
+              email: emailController.text.trim(),
+              password: passwordController.text.trim(),
+              role: "member"));
     }
   }
 

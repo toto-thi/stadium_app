@@ -6,6 +6,7 @@ import 'package:stadium_app/features/firebase_auth/presentation/cubit/auth/auth_
 import 'package:stadium_app/features/firebase_auth/presentation/cubit/user/user_cubit.dart';
 import 'package:stadium_app/features/home/presentation/pages/home_page.dart';
 import 'package:stadium_app/widget/base_widget/email_input.dart';
+import 'package:stadium_app/widget/home_widget/bottom_navigation_bar.dart';
 // import 'package:stadium_app/widget/base_widget/snack_bar_error.dart';
 
 import '../../../../../widget/base_widget/password_input.dart';
@@ -65,7 +66,7 @@ class _SignInPageState extends State<SignInPage> {
             return BlocBuilder<AuthCubit, AuthState>(
               builder: (context, authState) {
                 if (authState is Authenticated) {
-                  return const HomePage();
+                  return const MyBottomNavigationBar();
                 } else {
                   return  _bodyWidget();
                 }

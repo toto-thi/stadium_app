@@ -42,24 +42,24 @@ class MyApp extends StatelessWidget {
         ),
         onGenerateRoute: OnGenerateRoute.route,
         initialRoute: SIGN_IN_ROUTE,
-        routes: {
-          "/": (context) {
-            return BlocBuilder<AuthCubit, AuthState>(
-                builder: (context, authState) {
-              if (authState is AuthLoading) {
-                return const Center(
-                  child: CircularProgressIndicator(),
-                );
-              } else if (authState is Authenticated) {
-                return const HomePage();
-              } else if (authState is UnAuthenticated) {
-                return const SignInPage();
-              }
+        // routes: {
+        //   "/": (context) {
+        //     return BlocBuilder<AuthCubit, AuthState>(
+        //         builder: (context, authState) {
+        //       if (authState is AuthLoading) {
+        //         return const Center(
+        //           child: CircularProgressIndicator(),
+        //         );
+        //       } else if (authState is Authenticated) {
+        //         return const HomePage();
+        //       } else if (authState is UnAuthenticated) {
+        //         return const SignInPage();
+        //       }
 
-              return const CircularProgressIndicator();
-            });
-          }
-        },
+        //       return const CircularProgressIndicator();
+        //     });
+        //   }
+        // },
       ),
     );
   }
