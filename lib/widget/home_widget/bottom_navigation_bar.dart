@@ -17,7 +17,6 @@ class MyBottomNavigationBar extends StatefulWidget {
 class _MyBottomNavigationBarState extends State<MyBottomNavigationBar> {
   int _selectedIndex = 0;
 
-  // ignore: prefer_final_fields
   final _widgetOptions = [
     // homepage
     BlocBuilder<AuthCubit, AuthState>(
@@ -34,8 +33,18 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar> {
     ),
     const Text('ຄົ້ນຫາ'),
     const Text('ລາຍການຈອງ'),
-    
-    const SettingPage(uid: 'fdasdf'),
+
+    BlocBuilder<AuthCubit, AuthState>(
+      builder: (context, authState) {
+        if (authState is Authenticated) {
+          return SettingPage(uid: authState.uid);
+        } else {
+          return Center(
+            child: buildLoadingScreen(),
+          );
+        }
+      },
+    ),
   ];
 
   @override
