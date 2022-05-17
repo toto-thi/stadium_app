@@ -12,4 +12,5 @@ abstract class AuthRepository {
   Future<Either<Failure, String?>> getCurrentUId(); 
   Future<Either<Failure, void>> getCreateCurrentUser(UserEntity user); 
   Future<Either<Failure, UserModel?>> getUserDetailById(String uid);
+  // Future<Either<Failure, UserEntity?>> getFullUserData()
 }

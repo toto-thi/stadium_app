@@ -1,3 +1,4 @@
+// import 'package:stadium_app/features/firebase_auth/data/datasources/auth_local_datasource.dart';
 import 'package:stadium_app/features/firebase_auth/data/datasources/auth_remote_datasource.dart';
 import 'package:stadium_app/features/firebase_auth/data/models/user_model.dart';
 import 'package:stadium_app/features/firebase_auth/domain/entities/user_entity.dart';
@@ -7,8 +8,12 @@ import 'package:stadium_app/features/firebase_auth/domain/repositories/auth_repo
 
 class AuthRepositoryImpl implements AuthRepository {
   final AuthenticationRemoteDataSource authRemoteDataSource;
+  // final AuthLocalDataSource authLocalDataSource;
 
-  AuthRepositoryImpl({required this.authRemoteDataSource});
+  AuthRepositoryImpl({
+    required this.authRemoteDataSource,
+    //  required this.authLocalDataSource,
+  });
 
   @override
   Future<Either<Failure, String?>> getCurrentUId() async {
